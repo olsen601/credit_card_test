@@ -27,14 +27,43 @@ public class CreditCard {
 
     public static boolean isValidCreditCard(String cc) {
 
-        //TODO Replace with your code to process the credit card number, and determine if it is valid.
-        //TODO Make sure all the tests pass!
+        int[] n = new int[cc.length()];
+        for(int i=0; i < cc.length(); i++) {
+            n[i]= Character.getNumericValue(cc.charAt(i));
+
+        }
+
+        if(n[0] != 4){
+            System.out.println("Does not start with a 4");
+            return false;
+        }
+
+        int sum = 0;
+
+        for(int i = 0; i < 16; i+=2){
+            if(i == 6){
+                int n6 = 1 + ((n[6]*2) % 10);
+                sum = sum + n6;
+            } else {
+                sum = sum + n[i]*2;
+            }
+            if(i == 8){
+                int n8 = 1 + ((n[8]*2) % 10);
+                sum = sum + n8;
+            } else {
+                sum = sum + n[i]*2;
+            }
+            sum = sum + n[i]*2;
+        }
+        for(int i = 1; i < 16; i+=2){
+            sum = sum + n[i];
+        }
+
+        if (sum % 10 == 0) {
+            return true;
+        }
 
         return false;
 
     }
-
-
-
-
 }
