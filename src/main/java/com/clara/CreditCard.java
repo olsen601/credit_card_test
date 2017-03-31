@@ -38,22 +38,20 @@ public class CreditCard {
             return false;
         }
 
+        if(n.length != 16){
+            System.out.println("Not 16 digits");
+            return false;
+        }
+
         int sum = 0;
 
         for(int i = 0; i < 16; i+=2){
-            if(i == 6){
-                int n6 = 1 + ((n[6]*2) % 10);
-                sum = sum + n6;
-            } else {
+            if((n[i]*2) < 10){
                 sum = sum + n[i]*2;
-            }
-            if(i == 8){
-                int n8 = 1 + ((n[8]*2) % 10);
-                sum = sum + n8;
             } else {
-                sum = sum + n[i]*2;
+                int ni = 1 + ((n[i]*2) % 10);
+                sum = sum + ni;
             }
-            sum = sum + n[i]*2;
         }
         for(int i = 1; i < 16; i+=2){
             sum = sum + n[i];
@@ -61,9 +59,9 @@ public class CreditCard {
 
         if (sum % 10 == 0) {
             return true;
+        } else{
+            return false;
         }
-
-        return false;
 
     }
 }
